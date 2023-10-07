@@ -12,6 +12,8 @@ local Credits = Instance.new("TextLabel")
 local UICorner_3 = Instance.new("UICorner")
 local FlyButton = Instance.new("TextButton")
 local UICorner_4 = Instance.new("UICorner")
+local NoclipButton = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
 
 --Properties:
 
@@ -68,7 +70,7 @@ FlyButton.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
 FlyButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 FlyButton.BorderSizePixel = 0
 FlyButton.Position = UDim2.new(0.0213523135, 0, 0.229323313, 0)
-FlyButton.Size = UDim2.new(0, 268, 0, 146)
+FlyButton.Size = UDim2.new(0, 268, 0, 68)
 FlyButton.Font = Enum.Font.GothamBold
 FlyButton.Text = "Fly"
 FlyButton.TextColor3 = Color3.fromRGB(132, 87, 248)
@@ -79,9 +81,26 @@ FlyButton.TextWrapped = true
 
 UICorner_4.Parent = FlyButton
 
+NoclipButton.Name = "Noclip Button"
+NoclipButton.Parent = MainBackground
+NoclipButton.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
+NoclipButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+NoclipButton.BorderSizePixel = 0
+NoclipButton.Position = UDim2.new(0.0213523135, 0, 0.526315808, 0)
+NoclipButton.Size = UDim2.new(0, 268, 0, 69)
+NoclipButton.Font = Enum.Font.GothamBold
+NoclipButton.Text = "Noclip (Rejoin if your done using)"
+NoclipButton.TextColor3 = Color3.fromRGB(132, 87, 248)
+NoclipButton.TextScaled = true
+NoclipButton.TextSize = 14.000
+NoclipButton.TextStrokeTransparency = 0.500
+NoclipButton.TextWrapped = true
+
+UICorner_5.Parent = NoclipButton
+
 -- Scripts:
 
-local function UEVSEQ_fake_script() -- FlyButton.LocalScript 
+local function PXAVG_fake_script() -- FlyButton.LocalScript 
 	local script = Instance.new('LocalScript', FlyButton)
 
 	
@@ -139,12 +158,34 @@ local function UEVSEQ_fake_script() -- FlyButton.LocalScript
 	end)
 	
 end
-coroutine.wrap(UEVSEQ_fake_script)()
-local function BTECJE_fake_script() -- MainBackground.LocalScript 
+coroutine.wrap(PXAVG_fake_script)()
+local function YONPQZJ_fake_script() -- MainBackground.LocalScript 
 	local script = Instance.new('LocalScript', MainBackground)
 
 	-- to make the script draggable, we can set the parent of script is draggable
 	script.Parent.Draggable = true
 	script.Parent.Active = true
 end
-coroutine.wrap(BTECJE_fake_script)()
+coroutine.wrap(YONPQZJ_fake_script)()
+local function OQULOCL_fake_script() -- NoclipButton.LocalScript 
+	local script = Instance.new('LocalScript', NoclipButton)
+
+	-- The noclip script
+	
+	
+	
+	local runservice = game:GetService("RunService") -- This is the service for fps i think it handles all processing
+	
+	local player = game:GetService("Players").LocalPlayer
+	
+	runservice.Stepped:Connect(function()
+		for i,v in pairs(player.Character:GetDescendants()) do
+			if v:IsA("BasePart") then
+				v.CanCollide = false -- This disables the collision in your character (ALL COLLISIONS are disabled except for standing)
+			end
+		end
+	end)
+	
+	-- Noclip script is done...
+end
+coroutine.wrap(OQULOCL_fake_script)()
